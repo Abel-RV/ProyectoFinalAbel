@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class Partida {
 
     private TipoJuego tipoJuego;
     private EstadoJugador estadoJugador;
+    private LocalDateTime fechaPartida;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "jugador_id")
