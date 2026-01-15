@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -19,6 +22,15 @@ public class Objeto {
     private Long id;
 
     private String nombre;
-    private Tipo
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
+    @OneToMany(mappedBy = "objeto", orphanRemoval = true)
+    private List<Mapa> mapas = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "objetos", cascade = CascadeType.PERSIST)
+    private List<Partida> partidas = new ArrayList<>();
 
 }

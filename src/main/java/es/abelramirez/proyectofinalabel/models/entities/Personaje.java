@@ -4,6 +4,9 @@ import es.abelramirez.proyectofinalabel.models.enums.TipoCorazon;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -30,5 +33,8 @@ public class Personaje {
     private Double alcance;
     private Double rango;
     private Double suerte;
+
+    @OneToMany(mappedBy = "personaje", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Partida> partidas = new ArrayList<>();
 
 }

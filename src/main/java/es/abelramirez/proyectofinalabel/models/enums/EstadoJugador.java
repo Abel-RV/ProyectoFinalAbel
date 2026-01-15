@@ -1,5 +1,5 @@
 package es.abelramirez.proyectofinalabel.models.enums;
 
-public enum estadoJugador {
+public enum EstadoJugador {
     VICTORIA,MUERTO
 }
