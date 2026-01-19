@@ -1,5 +1,6 @@
-package es.abelramirez.proyectofinalabel.dto.request;
+package es.abelramirez.proyectofinalabel.mappers.request;
 
+import es.abelramirez.proyectofinalabel.dto.request.MapaRequest;
 import es.abelramirez.proyectofinalabel.models.entities.Mapa;
 import org.mapstruct.*;
 

@@ -25,13 +25,11 @@ public class Objeto {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-    @OneToMany(mappedBy = "objeto", orphanRemoval = true)
-    private List<Mapa> mapas = new ArrayList<>();
 
     @ManyToMany(mappedBy = "objetos", cascade = CascadeType.PERSIST)
     private List<Partida> partidas = new ArrayList<>();
 
     @ManyToMany(mappedBy = "objetos", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<Mapa> mapaszss = new ArrayList<>();
+    private List<Mapa> mapas = new ArrayList<>();
 
 }
