@@ -4,19 +4,23 @@ import es.abelramirez.proyectofinalabel.dto.request.ObjetoRequest;
 import es.abelramirez.proyectofinalabel.dto.response.ObjetoResponse;
 import es.abelramirez.proyectofinalabel.service.ObjetoService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/objeto")
+@RequestMapping("/objetos")
+@RequiredArgsConstructor
 public class ObjetoController {
     private ObjetoService enemigoService;
 
     @GetMapping
-    public ResponseEntity<List<ObjetoResponse>> getAll() {
-        return ResponseEntity.ok(enemigoService.findAll());
+    public ResponseEntity<Page<ObjetoResponse>> getAll(Pageable pageable) {
+        return ResponseEntity.ok(enemigoService.findAll(pageable));
     }
 
     @GetMapping("/{id}")

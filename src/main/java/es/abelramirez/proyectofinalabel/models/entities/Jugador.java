@@ -1,5 +1,6 @@
 package es.abelramirez.proyectofinalabel.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,6 +25,7 @@ public class Jugador {
     private String email;
 
     @OneToMany(mappedBy = "jugador", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Partida> partidas = new ArrayList<>();
 
 }

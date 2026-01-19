@@ -1,5 +1,6 @@
 package es.abelramirez.proyectofinalabel.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import es.abelramirez.proyectofinalabel.models.enums.TipoCorazon;
 import jakarta.persistence.*;
 import lombok.*;
@@ -34,6 +35,7 @@ public class Personaje {
     private Double suerte;
 
     @OneToMany(mappedBy = "personaje", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Partida> partidas = new ArrayList<>();
 
 }

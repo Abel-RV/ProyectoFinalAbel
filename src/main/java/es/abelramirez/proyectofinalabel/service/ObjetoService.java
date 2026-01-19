@@ -7,6 +7,8 @@ import es.abelramirez.proyectofinalabel.mappers.response.ObjetoMapperResponse;
 import es.abelramirez.proyectofinalabel.models.entities.Objeto;
 import es.abelramirez.proyectofinalabel.repositories.ObjetoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,8 +21,9 @@ public class ObjetoService {
     private final ObjetoMapperRequest objetoMapperRequest;
     private final ObjetoMapperResponse objetoMapperResponse;
 
-    public List<ObjetoResponse> findAll(){
-        return objetoRepository.findAll().stream().map(objetoMapperResponse::toDto).collect(Collectors.toList());
+    public Page<ObjetoResponse> findAll(Pageable pageable){
+        return objetoRepository.findAll(pageable)
+                .map(objetoMapperResponse::toDto);
     }
 
     public ObjetoRequest create(ObjetoRequest request){

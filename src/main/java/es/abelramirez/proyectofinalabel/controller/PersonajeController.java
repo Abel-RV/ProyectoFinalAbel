@@ -4,13 +4,15 @@ import es.abelramirez.proyectofinalabel.dto.request.PersonajeRequest;
 import es.abelramirez.proyectofinalabel.dto.response.PersonajeResponse;
 import es.abelramirez.proyectofinalabel.service.PersonajeService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/personaje")
+@RequestMapping("/personajes")
+@RequiredArgsConstructor
 public class PersonajeController {
     private PersonajeService enemigoService;
 

@@ -19,6 +19,12 @@ public class PersonajeService {
     private final PersonajeMapperRequest objetoMapperRequest;
     private final PersonajeMapperResponse objetoMapperResponse;
 
+    public PersonajeService(PersonajeMapperResponse objetoMapperResponse, PersonajeMapperRequest objetoMapperRequest, PersonajeRepository objetoRepository) {
+        this.objetoMapperResponse = objetoMapperResponse;
+        this.objetoMapperRequest = objetoMapperRequest;
+        this.objetoRepository = objetoRepository;
+    }
+
     public List<PersonajeResponse> findAll(){
         return objetoRepository.findAll().stream().map(objetoMapperResponse::toDto).collect(Collectors.toList());
     }

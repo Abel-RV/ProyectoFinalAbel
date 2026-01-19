@@ -1,5 +1,6 @@
 package es.abelramirez.proyectofinalabel.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,9 +28,11 @@ public class Objeto {
 
 
     @ManyToMany(mappedBy = "objetos", cascade = CascadeType.PERSIST)
+    @JsonIgnore
     private List<Partida> partidas = new ArrayList<>();
 
     @ManyToMany(mappedBy = "objetos", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JsonIgnore
     private List<Mapa> mapas = new ArrayList<>();
 
 }

@@ -19,6 +19,12 @@ public class PartidaService {
     private final PartidaMapperRequest objetoMapperRequest;
     private final PartidaMapperReponse objetoMapperResponse;
 
+    public PartidaService(PartidaRepository objetoRepository, PartidaMapperRequest objetoMapperRequest, PartidaMapperReponse objetoMapperResponse) {
+        this.objetoRepository = objetoRepository;
+        this.objetoMapperRequest = objetoMapperRequest;
+        this.objetoMapperResponse = objetoMapperResponse;
+    }
+
     public List<PartidaResponse> findAll(){
         return objetoRepository.findAll().stream().map(objetoMapperResponse::toDto).collect(Collectors.toList());
     }

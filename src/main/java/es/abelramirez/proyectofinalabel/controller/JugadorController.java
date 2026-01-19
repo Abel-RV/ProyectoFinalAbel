@@ -4,13 +4,15 @@ import es.abelramirez.proyectofinalabel.dto.request.JugadorRequest;
 import es.abelramirez.proyectofinalabel.dto.response.JugadorResponse;
 import es.abelramirez.proyectofinalabel.service.JugadorService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/jugador")
+@RequestMapping("/jugadores")
+@RequiredArgsConstructor
 public class JugadorController {
     private JugadorService jugadorService;
 

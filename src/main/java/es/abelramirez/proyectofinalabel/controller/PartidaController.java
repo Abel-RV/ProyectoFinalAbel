@@ -4,13 +4,15 @@ import es.abelramirez.proyectofinalabel.dto.request.PartidaRequest;
 import es.abelramirez.proyectofinalabel.dto.response.PartidaResponse;
 import es.abelramirez.proyectofinalabel.service.PartidaService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/partida")
+@RequestMapping("/partidas")
+@RequiredArgsConstructor
 public class PartidaController {
     private PartidaService enemigoService;
 

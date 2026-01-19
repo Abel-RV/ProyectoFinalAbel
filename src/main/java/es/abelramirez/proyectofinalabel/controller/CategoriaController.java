@@ -9,6 +9,9 @@ import es.abelramirez.proyectofinalabel.repositories.CategoriaRepository;
 import es.abelramirez.proyectofinalabel.service.CategoriaService;
 import es.abelramirez.proyectofinalabel.service.ObjetoService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +20,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/categorias")
+@RequiredArgsConstructor
 public class CategoriaController {
     private CategoriaService categoriaService;
 
     @GetMapping
-    public ResponseEntity<List<CategoriaResponse>> getAll() {
-        return ResponseEntity.ok(categoriaService.findAll());
+    public ResponseEntity<Page<CategoriaResponse>> getAll(Pageable pageable) {
+        return ResponseEntity.ok(categoriaService.findAll(pageable));
     }
 
     @GetMapping("/{id}")

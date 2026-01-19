@@ -1,5 +1,6 @@
 package es.abelramirez.proyectofinalabel.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import es.abelramirez.proyectofinalabel.models.enums.TipoEnemigo;
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,6 +29,7 @@ public class Enemigo {
     private TipoEnemigo tipo;
 
     @ManyToMany(mappedBy = "enemigos")
+    @JsonIgnore
     private List<Partida> partidas = new ArrayList<>();
 
 }

@@ -1,5 +1,6 @@
 package es.abelramirez.proyectofinalabel.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,7 @@ public class Categoria {
     private String nombreCategoria;
 
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Objeto> objetos = new ArrayList<>();
 
 }

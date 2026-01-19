@@ -8,6 +8,8 @@ import es.abelramirez.proyectofinalabel.models.entities.Categoria;
 import es.abelramirez.proyectofinalabel.models.entities.Objeto;
 import es.abelramirez.proyectofinalabel.repositories.CategoriaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +22,9 @@ public class CategoriaService {
     private final CategoriaMapperRequest objetoMapperRequest;
     private final CategoriaMapperResponse objetoMapperResponse;
 
-    public List<CategoriaResponse> findAll(){
-        return objetoRepository.findAll().stream().map(objetoMapperResponse::toDto).collect(Collectors.toList());
+    public Page<CategoriaResponse> findAll(Pageable pageable){
+        return objetoRepository.findAll(pageable)
+                .map(objetoMapperResponse::toDto);
     }
 
     public CategoriaRequest create(CategoriaRequest request){

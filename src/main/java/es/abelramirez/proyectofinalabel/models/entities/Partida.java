@@ -1,5 +1,6 @@
 package es.abelramirez.proyectofinalabel.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import es.abelramirez.proyectofinalabel.models.enums.EstadoJugador;
 import es.abelramirez.proyectofinalabel.models.enums.TipoJuego;
 import jakarta.persistence.*;
@@ -38,12 +39,14 @@ public class Partida {
     private Personaje personaje;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JsonIgnore
     @JoinTable(name = "partida_enemigos",
             joinColumns = @JoinColumn(name = "partida_id"),
             inverseJoinColumns = @JoinColumn(name = "enemigos_id"))
     private List<Enemigo> enemigos = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)
+    @JsonIgnore
     @JoinTable(name = "partida_objetos",
             joinColumns = @JoinColumn(name = "partida_id"),
             inverseJoinColumns = @JoinColumn(name = "objetos_id"))

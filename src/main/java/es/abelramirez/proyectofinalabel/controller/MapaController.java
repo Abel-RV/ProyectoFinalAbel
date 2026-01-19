@@ -4,13 +4,15 @@ import es.abelramirez.proyectofinalabel.dto.request.MapaRequest;
 import es.abelramirez.proyectofinalabel.dto.response.MapaResponse;
 import es.abelramirez.proyectofinalabel.service.MapaService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/mapa")
+@RequestMapping("/mapas")
+@RequiredArgsConstructor
 public class MapaController {
     private MapaService enemigoService;
 

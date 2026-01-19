@@ -20,6 +20,12 @@ public class EnemigoService {
     private final EnemigoMapperRequest objetoMapperRequest;
     private final EnemigoMapperResponse objetoMapperResponse;
 
+    public EnemigoService(EnemigoRepository objetoRepository, EnemigoMapperRequest objetoMapperRequest, EnemigoMapperResponse objetoMapperResponse) {
+        this.objetoRepository = objetoRepository;
+        this.objetoMapperRequest = objetoMapperRequest;
+        this.objetoMapperResponse = objetoMapperResponse;
+    }
+
     public List<EnemigoResponse> findAll(){
         return objetoRepository.findAll().stream().map(objetoMapperResponse::toDto).collect(Collectors.toList());
     }
