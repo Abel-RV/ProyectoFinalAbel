@@ -2,8 +2,7 @@ package es.abelramirez.proyectofinalabel.models.entities;
 
 import es.abelramirez.proyectofinalabel.models.enums.TipoEnemigo;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +11,9 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "enemigo")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Enemigo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +24,7 @@ public class Enemigo {
 
     private Long vida;
 
+    @Enumerated(EnumType.STRING)
     private TipoEnemigo tipo;
 
     @ManyToMany(mappedBy = "enemigos")

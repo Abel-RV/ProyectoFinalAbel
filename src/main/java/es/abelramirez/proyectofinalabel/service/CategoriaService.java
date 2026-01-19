@@ -3,6 +3,6 @@ package es.abelramirez.proyectofinalabel.service;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EnemigoController {
+public class CategoriaService {
 
 }

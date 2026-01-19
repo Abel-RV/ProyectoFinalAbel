@@ -24,7 +24,6 @@ public class Personaje {
     private Integer numCorazones;
 
     @Enumerated(EnumType.STRING)
-    @Builder.Default
     private TipoCorazon tipoCorazon=TipoCorazon.CORAZON_ROJO;
 
     private Double ataque;
