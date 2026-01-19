@@ -4,6 +4,9 @@ import es.abelramirez.proyectofinalabel.models.enums.TipoSala;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Builder
 @Getter
 @Setter
@@ -22,8 +25,10 @@ public class Mapa {
     @Enumerated(EnumType.STRING)
     private TipoSala tipoSala;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "objeto_id")
-    private Objeto objeto;
+    @ManyToMany
+    @JoinTable(name = "mapa_objetos",
+            joinColumns = @JoinColumn(name = "mapa_id"),
+            inverseJoinColumns = @JoinColumn(name = "objetos_id"))
+    private List<Objeto> objetos = new ArrayList<>();
 
 }

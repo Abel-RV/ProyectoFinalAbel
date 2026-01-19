@@ -31,4 +31,7 @@ public class Objeto {
     @ManyToMany(mappedBy = "objetos", cascade = CascadeType.PERSIST)
     private List<Partida> partidas = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "objetos", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Mapa> mapaszss = new ArrayList<>();
+
 }
