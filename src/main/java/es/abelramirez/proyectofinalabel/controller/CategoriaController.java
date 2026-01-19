@@ -21,8 +21,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/categorias")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class CategoriaController {
-    private CategoriaService categoriaService;
+    private final CategoriaService categoriaService;
 
     @GetMapping
     public ResponseEntity<Page<CategoriaResponse>> getAll(Pageable pageable) {
@@ -30,7 +31,7 @@ public class CategoriaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CategoriaResponse> getById(@PathVariable @Valid Long id) {
+    public ResponseEntity<CategoriaResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(categoriaService.findById(id));
     }
 

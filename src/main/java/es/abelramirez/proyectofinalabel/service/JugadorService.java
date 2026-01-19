@@ -19,12 +19,6 @@ public class JugadorService {
     private final JugadorMapperRequest objetoMapperRequest;
     private final JugadorMapperResponse objetoMapperResponse;
 
-    public JugadorService(JugadorRepository objetoRepository, JugadorMapperRequest objetoMapperRequest, JugadorMapperResponse objetoMapperResponse) {
-        this.objetoRepository = objetoRepository;
-        this.objetoMapperRequest = objetoMapperRequest;
-        this.objetoMapperResponse = objetoMapperResponse;
-    }
-
     public List<JugadorResponse> findAll(){
         return objetoRepository.findAll().stream().map(objetoMapperResponse::toDto).collect(Collectors.toList());
     }

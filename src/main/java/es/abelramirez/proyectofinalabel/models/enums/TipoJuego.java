@@ -1,5 +1,5 @@
 package es.abelramirez.proyectofinalabel.models.enums;
 
 public enum TipoJuego {
-    NORMAL,DIFICIL,CODICIA
+    NORMAL,DIFICIL,GREED
 }

@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/jugadores")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class JugadorController {
     private JugadorService jugadorService;
@@ -22,7 +23,7 @@ public class JugadorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<JugadorResponse> getById(@PathVariable @Valid Long id) {
+    public ResponseEntity<JugadorResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(jugadorService.findById(id));
     }
 

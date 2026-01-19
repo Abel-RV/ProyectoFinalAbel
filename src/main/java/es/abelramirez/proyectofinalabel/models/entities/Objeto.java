@@ -22,17 +22,15 @@ public class Objeto {
     private String nombre;
     private String descripcion;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-
-    @ManyToMany(mappedBy = "objetos", cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "objetos")
     @JsonIgnore
     private List<Partida> partidas = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "objetos", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(mappedBy = "objetos")
     @JsonIgnore
     private List<Mapa> mapas = new ArrayList<>();
-
 }

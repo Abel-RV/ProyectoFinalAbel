@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/mapas")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class MapaController {
     private MapaService enemigoService;
 
@@ -22,7 +23,7 @@ public class MapaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MapaResponse> getById(@PathVariable @Valid Long id) {
+    public ResponseEntity<MapaResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(enemigoService.findById(id));
     }
 

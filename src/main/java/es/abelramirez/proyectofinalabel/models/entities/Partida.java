@@ -28,28 +28,40 @@ public class Partida {
 
     @Enumerated(EnumType.STRING)
     private EstadoJugador estadoJugador;
+
     private LocalDateTime fechaPartida;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    // ❌ ANTES: @ManyToOne(cascade = CascadeType.ALL)
+    // ✅ AHORA: Sin cascade - el jugador ya existe
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "jugador_id")
     private Jugador jugador;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    // ❌ ANTES: @ManyToOne(cascade = CascadeType.ALL)
+    // ✅ AHORA: Sin cascade - el personaje ya existe
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "personaje_id")
     private Personaje personaje;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany
     @JsonIgnore
     @JoinTable(name = "partida_enemigos",
             joinColumns = @JoinColumn(name = "partida_id"),
             inverseJoinColumns = @JoinColumn(name = "enemigos_id"))
     private List<Enemigo> enemigos = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     @JsonIgnore
     @JoinTable(name = "partida_objetos",
             joinColumns = @JoinColumn(name = "partida_id"),
             inverseJoinColumns = @JoinColumn(name = "objetos_id"))
     private List<Objeto> objetos = new ArrayList<>();
 
+    // Método helper para establecer la fecha automáticamente
+    @PrePersist
+    protected void onCreate() {
+        if (fechaPartida == null) {
+            fechaPartida = LocalDateTime.now();
+        }
+    }
 }

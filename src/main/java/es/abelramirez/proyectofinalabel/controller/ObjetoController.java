@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/objetos")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class ObjetoController {
     private ObjetoService enemigoService;
 
@@ -24,7 +25,7 @@ public class ObjetoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ObjetoResponse> getById(@PathVariable @Valid Long id) {
+    public ResponseEntity<ObjetoResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(enemigoService.findById(id));
     }
 

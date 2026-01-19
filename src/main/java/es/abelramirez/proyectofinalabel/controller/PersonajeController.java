@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/personajes")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class PersonajeController {
     private PersonajeService enemigoService;
 
@@ -22,7 +23,7 @@ public class PersonajeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PersonajeResponse> getById(@PathVariable @Valid Long id) {
+    public ResponseEntity<PersonajeResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(enemigoService.findById(id));
     }
 

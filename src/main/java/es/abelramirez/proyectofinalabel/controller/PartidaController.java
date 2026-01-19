@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/partidas")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class PartidaController {
     private PartidaService enemigoService;
 
@@ -22,7 +23,7 @@ public class PartidaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PartidaResponse> getById(@PathVariable @Valid Long id) {
+    public ResponseEntity<PartidaResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(enemigoService.findById(id));
     }
 

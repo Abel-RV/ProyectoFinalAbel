@@ -19,12 +19,6 @@ public class MapaService {
     private final MapaMapperRequest objetoMapperRequest;
     private final MapaMapperResponse objetoMapperResponse;
 
-    public MapaService(MapaRepository objetoRepository, MapaMapperRequest objetoMapperRequest, MapaMapperResponse objetoMapperResponse) {
-        this.objetoRepository = objetoRepository;
-        this.objetoMapperRequest = objetoMapperRequest;
-        this.objetoMapperResponse = objetoMapperResponse;
-    }
-
     public List<MapaResponse> findAll(){
         return objetoRepository.findAll().stream().map(objetoMapperResponse::toDto).collect(Collectors.toList());
     }
