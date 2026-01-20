@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class PersonajeController {
-    private PersonajeService enemigoService;
+    private final PersonajeService enemigoService;
 
     @GetMapping
     public ResponseEntity<List<PersonajeResponse>> getAll() {

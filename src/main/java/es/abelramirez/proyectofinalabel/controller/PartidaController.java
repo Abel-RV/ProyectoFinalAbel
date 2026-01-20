@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class PartidaController {
-    private PartidaService enemigoService;
+    private final PartidaService enemigoService;
 
     @GetMapping
     public ResponseEntity<List<PartidaResponse>> getAll() {

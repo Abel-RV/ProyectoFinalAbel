@@ -36,7 +36,7 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public ResponseEntity<CategoriaRequest> post(@RequestBody CategoriaRequest categoriaRequest) {
+    public ResponseEntity<CategoriaRequest> post(@Valid @RequestBody CategoriaRequest categoriaRequest) {
         return ResponseEntity.ok(categoriaService.create(categoriaRequest));
     }
 

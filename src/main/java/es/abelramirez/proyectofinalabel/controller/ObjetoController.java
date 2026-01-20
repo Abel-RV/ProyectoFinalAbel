@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class ObjetoController {
-    private ObjetoService enemigoService;
+    private final ObjetoService enemigoService;
 
     @GetMapping
     public ResponseEntity<Page<ObjetoResponse>> getAll(Pageable pageable) {

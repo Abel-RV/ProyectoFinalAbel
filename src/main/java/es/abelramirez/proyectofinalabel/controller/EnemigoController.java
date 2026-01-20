@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class EnemigoController {
-    private EnemigoService enemigoService;
+    private final EnemigoService enemigoService;
 
     @GetMapping
     public ResponseEntity<List<EnemigoResponse>> getAll() {

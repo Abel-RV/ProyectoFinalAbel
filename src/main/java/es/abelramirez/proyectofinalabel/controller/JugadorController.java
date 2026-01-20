@@ -15,7 +15,7 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class JugadorController {
-    private JugadorService jugadorService;
+    private final JugadorService jugadorService;
 
     @GetMapping
     public ResponseEntity<List<JugadorResponse>> getAll() {

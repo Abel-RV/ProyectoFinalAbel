@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class MapaController {
-    private MapaService enemigoService;
+    private final MapaService enemigoService;
 
     @GetMapping
     public ResponseEntity<List<MapaResponse>> getAll() {

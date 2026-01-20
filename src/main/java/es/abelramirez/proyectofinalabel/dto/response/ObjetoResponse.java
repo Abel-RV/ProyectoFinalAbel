@@ -20,5 +20,6 @@ public class ObjetoResponse implements Serializable {
     @Value
     public static class CategoriaDto implements Serializable {
         Long id;
+        String nombreCategoria; // ⚠️ AÑADE ESTO
     }
 }
