@@ -28,6 +28,7 @@ public class PartidaResponse implements Serializable {
     @Value
     public static class JugadorDto implements Serializable {
         Long id;
+        String nombre;
     }
 
     /**
@@ -36,6 +37,7 @@ public class PartidaResponse implements Serializable {
     @Value
     public static class PersonajeDto implements Serializable {
         Long id;
+        String nombre;
     }
 
     /**
@@ -44,6 +46,8 @@ public class PartidaResponse implements Serializable {
     @Value
     public static class EnemigoDto implements Serializable {
         Long id;
+        String nombreEnemigo;
+
     }
 
     /**
@@ -52,5 +56,7 @@ public class PartidaResponse implements Serializable {
     @Value
     public static class ObjetoDto implements Serializable {
         Long id;
+        String nombre;
+
     }
 }

@@ -23,7 +23,7 @@ public class JugadorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<JugadorResponse> getById(@PathVariable Long id) {
+    public ResponseEntity<JugadorResponse> getById(@Valid @PathVariable Long id) {
         return ResponseEntity.ok(jugadorService.findById(id));
     }
 
@@ -33,12 +33,12 @@ public class JugadorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<JugadorResponse> put(@PathVariable Long id,JugadorRequest categoriaRequest) {
+    public ResponseEntity<JugadorResponse> put(@Valid @PathVariable Long id,@RequestBody JugadorRequest categoriaRequest) {
         return ResponseEntity.ok(jugadorService.update(id,categoriaRequest));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@Valid @PathVariable Long id) {
         jugadorService.delete(id);
         return ResponseEntity.noContent().build();
     }

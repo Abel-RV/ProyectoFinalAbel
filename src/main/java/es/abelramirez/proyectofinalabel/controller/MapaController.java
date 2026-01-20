@@ -23,7 +23,7 @@ public class MapaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MapaResponse> getById(@PathVariable Long id) {
+    public ResponseEntity<MapaResponse> getById(@Valid @PathVariable Long id) {
         return ResponseEntity.ok(enemigoService.findById(id));
     }
 
@@ -33,7 +33,7 @@ public class MapaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MapaResponse> put(@PathVariable Long id,MapaRequest categoriaRequest) {
+    public ResponseEntity<MapaResponse> put(@Valid @PathVariable Long id,@RequestBody MapaRequest categoriaRequest) {
         return ResponseEntity.ok(enemigoService.update(id,categoriaRequest));
     }
 

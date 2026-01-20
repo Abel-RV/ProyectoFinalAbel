@@ -23,7 +23,7 @@ public class PersonajeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PersonajeResponse> getById(@PathVariable Long id) {
+    public ResponseEntity<PersonajeResponse> getById(@Valid @PathVariable Long id) {
         return ResponseEntity.ok(enemigoService.findById(id));
     }
 
@@ -33,12 +33,12 @@ public class PersonajeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PersonajeResponse> put(@PathVariable Long id,PersonajeRequest categoriaRequest) {
+    public ResponseEntity<PersonajeResponse> put(@Valid @PathVariable Long id,@RequestBody PersonajeRequest categoriaRequest) {
         return ResponseEntity.ok(enemigoService.update(id,categoriaRequest));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@Valid @PathVariable Long id) {
         enemigoService.delete(id);
         return ResponseEntity.noContent().build();
     }
