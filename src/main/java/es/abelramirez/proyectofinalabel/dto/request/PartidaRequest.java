@@ -2,6 +2,9 @@ package es.abelramirez.proyectofinalabel.dto.request;
 
 import es.abelramirez.proyectofinalabel.models.enums.EstadoJugador;
 import es.abelramirez.proyectofinalabel.models.enums.TipoJuego;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -9,7 +12,9 @@ import java.io.Serializable;
 /**
  * DTO for {@link es.abelramirez.proyectofinalabel.models.entities.Partida}
  */
-@Value
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class PartidaRequest implements Serializable {
     TipoJuego tipoJuego;
     EstadoJugador estadoJugador;
@@ -31,4 +36,6 @@ public class PartidaRequest implements Serializable {
     public static class PersonajeDto implements Serializable {
         Long id;
     }
+
+
 }

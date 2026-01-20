@@ -5,7 +5,10 @@ import es.abelramirez.proyectofinalabel.dto.response.MapaResponse;
 import es.abelramirez.proyectofinalabel.mappers.request.MapaMapperRequest;
 import es.abelramirez.proyectofinalabel.mappers.response.MapaMapperResponse;
 import es.abelramirez.proyectofinalabel.models.entities.Mapa;
+import es.abelramirez.proyectofinalabel.models.entities.Objeto;
 import es.abelramirez.proyectofinalabel.repositories.MapaRepository;
+import es.abelramirez.proyectofinalabel.repositories.ObjetoRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,32 +18,44 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class MapaService {
-    private final MapaRepository objetoRepository;
+    private final MapaRepository mapaRepository;
+    private final ObjetoRepository objetoRepository;
     private final MapaMapperRequest objetoMapperRequest;
     private final MapaMapperResponse objetoMapperResponse;
 
+    @Transactional
+    public void addObjeto(Long mapaId, Long objetoId) {
+        Mapa mapa = mapaRepository.findById(mapaId)
+                .orElseThrow(() -> new RuntimeException("Mapa no encontrado"));
+        Objeto objeto = objetoRepository.findById(objetoId)
+                .orElseThrow(() -> new RuntimeException("Objeto no encontrado"));
+
+        mapa.getObjetos().add(objeto);
+        mapaRepository.save(mapa);
+    }
+
     public List<MapaResponse> findAll(){
-        return objetoRepository.findAll().stream().map(objetoMapperResponse::toDto).collect(Collectors.toList());
+        return mapaRepository.findAll().stream().map(objetoMapperResponse::toDto).collect(Collectors.toList());
     }
 
     public MapaRequest create(MapaRequest request){
         Mapa obj1 = objetoMapperRequest.toEntity(request);
-        Mapa objNuevo = objetoRepository.save(obj1);
+        Mapa objNuevo = mapaRepository.save(obj1);
         return objetoMapperRequest.toDto(objNuevo);
     }
 
     public MapaResponse findById(Long id){
-        return objetoRepository.findById(id).map(objetoMapperResponse::toDto).orElseThrow(()->new RuntimeException("Id no encontrado"));
+        return mapaRepository.findById(id).map(objetoMapperResponse::toDto).orElseThrow(()->new RuntimeException("Id no encontrado"));
     }
 
     public void delete(Long id){
-        objetoRepository.deleteById(id);
+        mapaRepository.deleteById(id);
     }
 
     public MapaResponse update(Long id, MapaRequest request){
-        Mapa obj1 = objetoRepository.findById(id).orElseThrow(()->new RuntimeException("Id no encontrado"));
+        Mapa obj1 = mapaRepository.findById(id).orElseThrow(()->new RuntimeException("Id no encontrado"));
         objetoMapperRequest.partialUpdate(request,obj1);
-        Mapa nuevo = objetoRepository.save(obj1);
+        Mapa nuevo = mapaRepository.save(obj1);
         return objetoMapperResponse.toDto(nuevo);
     }
 }

@@ -1,6 +1,9 @@
 package es.abelramirez.proyectofinalabel.dto.request;
 
 import es.abelramirez.proyectofinalabel.models.enums.TipoCorazon;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -8,7 +11,9 @@ import java.io.Serializable;
 /**
  * DTO for {@link es.abelramirez.proyectofinalabel.models.entities.Personaje}
  */
-@Value
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class PersonajeRequest implements Serializable {
     String nombre;
     Integer numCorazones;

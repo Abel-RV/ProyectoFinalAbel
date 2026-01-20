@@ -4,8 +4,13 @@ import es.abelramirez.proyectofinalabel.dto.request.PartidaRequest;
 import es.abelramirez.proyectofinalabel.dto.response.PartidaResponse;
 import es.abelramirez.proyectofinalabel.mappers.request.PartidaMapperRequest;
 import es.abelramirez.proyectofinalabel.mappers.response.PartidaMapperReponse;
+import es.abelramirez.proyectofinalabel.models.entities.Enemigo;
+import es.abelramirez.proyectofinalabel.models.entities.Objeto;
 import es.abelramirez.proyectofinalabel.models.entities.Partida;
+import es.abelramirez.proyectofinalabel.repositories.EnemigoRepository;
+import es.abelramirez.proyectofinalabel.repositories.ObjetoRepository;
 import es.abelramirez.proyectofinalabel.repositories.PartidaRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,32 +20,56 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class PartidaService {
-    private final PartidaRepository objetoRepository;
+    private final PartidaRepository partidaRepository;
+    private final ObjetoRepository objetoRepository;
+    private final EnemigoRepository enemigoRepository;
     private final PartidaMapperRequest objetoMapperRequest;
     private final PartidaMapperReponse objetoMapperResponse;
 
+    @Transactional
+    public void anadirObjeto(Long idPartida, Long idObjeto) {
+        Partida partida = partidaRepository.findById(idPartida)
+                .orElseThrow(() -> new RuntimeException("Partida no encontrada"));
+        Objeto objeto = objetoRepository.findById(idObjeto)
+                .orElseThrow(() -> new RuntimeException("Objeto no encontrado"));
+
+        partida.getObjetos().add(objeto);
+        partidaRepository.save(partida);
+    }
+
+    @Transactional
+    public void anadirEnemigo(Long idPartida, Long idEnemigo) {
+        Partida partida = partidaRepository.findById(idPartida)
+                .orElseThrow(() -> new RuntimeException("Partida no encontrada"));
+        Enemigo enemigo = enemigoRepository.findById(idEnemigo)
+                .orElseThrow(() -> new RuntimeException("Enemigo no encontrado"));
+
+        partida.getEnemigos().add(enemigo);
+        partidaRepository.save(partida);
+    }
+
     public List<PartidaResponse> findAll(){
-        return objetoRepository.findAll().stream().map(objetoMapperResponse::toDto).collect(Collectors.toList());
+        return partidaRepository.findAll().stream().map(objetoMapperResponse::toDto).collect(Collectors.toList());
     }
 
     public PartidaRequest create(PartidaRequest request){
         Partida obj1 = objetoMapperRequest.toEntity(request);
-        Partida objNuevo = objetoRepository.save(obj1);
+        Partida objNuevo = partidaRepository.save(obj1);
         return objetoMapperRequest.toDto(objNuevo);
     }
 
     public PartidaResponse findById(Long id){
-        return objetoRepository.findById(id).map(objetoMapperResponse::toDto).orElseThrow();
+        return partidaRepository.findById(id).map(objetoMapperResponse::toDto).orElseThrow();
     }
 
     public void delete(Long id){
-        objetoRepository.deleteById(id);
+        partidaRepository.deleteById(id);
     }
 
     public PartidaResponse update(Long id, PartidaRequest request){
-        Partida obj1 = objetoRepository.findById(id).orElseThrow(()->new RuntimeException("Id no encontrado"));
+        Partida obj1 = partidaRepository.findById(id).orElseThrow(()->new RuntimeException("Id no encontrado"));
         objetoMapperRequest.partialUpdate(request,obj1);
-        Partida nuevo = objetoRepository.save(obj1);
+        Partida nuevo = partidaRepository.save(obj1);
         return objetoMapperResponse.toDto(nuevo);
     }
 
