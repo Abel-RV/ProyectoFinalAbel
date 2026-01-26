@@ -29,21 +29,25 @@ public class ObjetoController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Obtiene un Objeto especifico en base a su ID",description = "GET")
     public ResponseEntity<ObjetoResponse> getById(@Valid @PathVariable Long id) {
         return ResponseEntity.ok(enemigoService.findById(id));
     }
 
     @PostMapping
+    @Operation(summary = "Crea un nuevo objeto",description = "POST")
     public ResponseEntity<ObjetoRequest> post(@RequestBody ObjetoRequest categoriaRequest) {
         return ResponseEntity.ok(enemigoService.create(categoriaRequest));
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Edita un objeto ya existente, lo busca en base a su ID",description = "PUT")
     public ResponseEntity<ObjetoResponse> put(@Valid @PathVariable Long id,@RequestBody ObjetoRequest categoriaRequest) {
         return ResponseEntity.ok(enemigoService.update(id,categoriaRequest));
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Elimina un objeto ya existente, lo busca en base a su ID",description = "DELETE")
     public ResponseEntity<Void> delete(@Valid @PathVariable Long id) {
         enemigoService.delete(id);
         return ResponseEntity.noContent().build();

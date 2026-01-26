@@ -1,6 +1,7 @@
 package es.abelramirez.proyectofinalabel.dto.request;
 
 import es.abelramirez.proyectofinalabel.models.enums.TipoCorazon;
+import jakarta.validation.constraints.Max;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class PersonajeRequest implements Serializable {
     String nombre;
+
+    @Max(12)
     Integer numCorazones;
     TipoCorazon tipoCorazon;
     Double ataque;

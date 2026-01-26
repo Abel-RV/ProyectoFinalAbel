@@ -3,6 +3,7 @@ package es.abelramirez.proyectofinalabel.controller;
 import es.abelramirez.proyectofinalabel.dto.request.PartidaRequest;
 import es.abelramirez.proyectofinalabel.dto.response.PartidaResponse;
 import es.abelramirez.proyectofinalabel.service.PartidaService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,31 +21,37 @@ public class PartidaController {
     private final PartidaService partidaService;
 
     @GetMapping
+    @Operation(summary = "Obtiene todas las partidas",description = "GET")
     public ResponseEntity<List<PartidaResponse>> getAll() {
         return ResponseEntity.ok(partidaService.findAll());
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Obtiene un mapa especifico en base a su ID",description = "GET")
     public ResponseEntity<PartidaResponse> getById(@Valid @PathVariable Long id) {
         return ResponseEntity.ok(partidaService.findById(id));
     }
 
     @PostMapping
+    @Operation(summary = "Crea una nueva partida",description = "POST")
     public ResponseEntity<PartidaRequest> post(@RequestBody PartidaRequest categoriaRequest) {
         return ResponseEntity.ok(partidaService.create(categoriaRequest));
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Edita una partida ya existente, la busca en base a su ID",description = "PUT")
     public ResponseEntity<PartidaResponse> put(@Valid @PathVariable Long id,@RequestBody PartidaRequest categoriaRequest) {
         return ResponseEntity.ok(partidaService.update(id,categoriaRequest));
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Borra una partida ya existente, la busca en base a su ID",description = "DELETE")
     public ResponseEntity<Void> delete(@Valid @PathVariable Long id) {
         partidaService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Asigna un objeto a una partida especifica",description = "POST")
     @PostMapping("/{id}/objetos/{idObjeto}")
     public ResponseEntity<Void> addObjeto(@PathVariable Long id, @PathVariable Long idObjeto) {
 
@@ -53,6 +60,7 @@ public class PartidaController {
     }
 
     @PostMapping("/{id}/enemigos/{idEnemigo}")
+    @Operation(summary = "Asigna un enemigo a una partida especifica",description = "POST")
     public ResponseEntity<Void> addEnemigo(@PathVariable Long id, @PathVariable Long idEnemigo) {
         partidaService.anadirEnemigo(id, idEnemigo);
         return ResponseEntity.ok().build();

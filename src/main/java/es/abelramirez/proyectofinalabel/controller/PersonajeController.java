@@ -3,6 +3,7 @@ package es.abelramirez.proyectofinalabel.controller;
 import es.abelramirez.proyectofinalabel.dto.request.PersonajeRequest;
 import es.abelramirez.proyectofinalabel.dto.response.PersonajeResponse;
 import es.abelramirez.proyectofinalabel.service.PersonajeService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,26 +21,31 @@ public class PersonajeController {
     private final PersonajeService enemigoService;
 
     @GetMapping
+    @Operation(summary = "Obtiene todos los personajes",description = "GET")
     public ResponseEntity<List<PersonajeResponse>> getAll() {
         return ResponseEntity.ok(enemigoService.findAll());
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Obtiene un personaje espefico en base a su ID",description = "GET")
     public ResponseEntity<PersonajeResponse> getById(@Valid @PathVariable Long id) {
         return ResponseEntity.ok(enemigoService.findById(id));
     }
 
     @PostMapping
+    @Operation(summary = "Crea un nuevo personaje",description = "POST")
     public ResponseEntity<PersonajeRequest> post(@RequestBody PersonajeRequest categoriaRequest) {
         return ResponseEntity.ok(enemigoService.create(categoriaRequest));
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Edita un personaje ya existente, lo busca en base a su ID",description = "PUT")
     public ResponseEntity<PersonajeResponse> put(@Valid @PathVariable Long id,@RequestBody PersonajeRequest categoriaRequest) {
         return ResponseEntity.ok(enemigoService.update(id,categoriaRequest));
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Borra un personaje ya existente, lo busca en base a su ID",description = "DELETE")
     public ResponseEntity<Void> delete(@Valid @PathVariable Long id) {
         enemigoService.delete(id);
         return ResponseEntity.noContent().build();
