@@ -27,9 +27,9 @@ public class MapaService {
     public void addObjeto(Long mapaId, Long objetoId) {
         Mapa mapa = mapaRepository.findById(mapaId)
                 .orElseThrow(() -> new RuntimeException("Mapa no encontrado"));
+
         Objeto objeto = objetoRepository.findById(objetoId)
                 .orElseThrow(() -> new RuntimeException("Objeto no encontrado"));
-
         mapa.getObjetos().add(objeto);
         mapaRepository.save(mapa);
     }

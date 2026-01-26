@@ -3,6 +3,7 @@ package es.abelramirez.proyectofinalabel.controller;
 import es.abelramirez.proyectofinalabel.dto.request.PartidaRequest;
 import es.abelramirez.proyectofinalabel.dto.response.PartidaResponse;
 import es.abelramirez.proyectofinalabel.service.PartidaService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 @RequestMapping("/partidas")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
+@Tag(name="Controlador de las partidas",description = "Gestiona las partidas")
 public class PartidaController {
     private final PartidaService partidaService;
 

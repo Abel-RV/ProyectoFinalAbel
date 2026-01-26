@@ -3,6 +3,8 @@ package es.abelramirez.proyectofinalabel.controller;
 import es.abelramirez.proyectofinalabel.dto.request.ObjetoRequest;
 import es.abelramirez.proyectofinalabel.dto.response.ObjetoResponse;
 import es.abelramirez.proyectofinalabel.service.ObjetoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,9 +18,11 @@ import java.util.List;
 @RequestMapping("/objetos")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
+@Tag(name="Controlador de los objetos",description = "Gestiona los objetos")
 public class ObjetoController {
     private final ObjetoService enemigoService;
 
+    @Operation(summary = "Obtiene todos los objetos",description = "GET")
     @GetMapping
     public ResponseEntity<Page<ObjetoResponse>> getAll(Pageable pageable) {
         return ResponseEntity.ok(enemigoService.findAll(pageable));

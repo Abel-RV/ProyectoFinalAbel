@@ -3,6 +3,7 @@ package es.abelramirez.proyectofinalabel.controller;
 import es.abelramirez.proyectofinalabel.dto.request.PersonajeRequest;
 import es.abelramirez.proyectofinalabel.dto.response.PersonajeResponse;
 import es.abelramirez.proyectofinalabel.service.PersonajeService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 @RequestMapping("/personajes")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
+@Tag(name="Controlador de los personajes",description = "Gestiona los personajes jugables")
 public class PersonajeController {
     private final PersonajeService enemigoService;
 
