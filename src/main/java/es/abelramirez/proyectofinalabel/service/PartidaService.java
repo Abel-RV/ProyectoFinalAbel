@@ -23,8 +23,8 @@ public class PartidaService {
     private final PartidaRepository partidaRepository;
     private final ObjetoRepository objetoRepository;
     private final EnemigoRepository enemigoRepository;
-    private final PartidaMapperRequest objetoMapperRequest;
-    private final PartidaMapperReponse objetoMapperResponse;
+    private final PartidaMapperRequest partidaMapperRequest;
+    private final PartidaMapperReponse partidaMapperReponse;
 
     @Transactional
     public void anadirObjeto(Long idPartida, Long idObjeto) {
@@ -49,17 +49,17 @@ public class PartidaService {
     }
 
     public List<PartidaResponse> findAll(){
-        return partidaRepository.findAll().stream().map(objetoMapperResponse::toDto).collect(Collectors.toList());
+        return partidaRepository.findAll().stream().map(partidaMapperReponse::toDto).collect(Collectors.toList());
     }
 
     public PartidaRequest create(PartidaRequest request){
-        Partida obj1 = objetoMapperRequest.toEntity(request);
+        Partida obj1 = partidaMapperRequest.toEntity(request);
         Partida objNuevo = partidaRepository.save(obj1);
-        return objetoMapperRequest.toDto(objNuevo);
+        return partidaMapperRequest.toDto(objNuevo);
     }
 
     public PartidaResponse findById(Long id){
-        return partidaRepository.findById(id).map(objetoMapperResponse::toDto).orElseThrow();
+        return partidaRepository.findById(id).map(partidaMapperReponse::toDto).orElseThrow();
     }
 
     public void delete(Long id){
@@ -68,9 +68,9 @@ public class PartidaService {
 
     public PartidaResponse update(Long id, PartidaRequest request){
         Partida obj1 = partidaRepository.findById(id).orElseThrow(()->new RuntimeException("Id no encontrado"));
-        objetoMapperRequest.partialUpdate(request,obj1);
+        partidaMapperRequest.partialUpdate(request,obj1);
         Partida nuevo = partidaRepository.save(obj1);
-        return objetoMapperResponse.toDto(nuevo);
+        return partidaMapperReponse.toDto(nuevo);
     }
 
 }

@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
 public class MapaService {
     private final MapaRepository mapaRepository;
     private final ObjetoRepository objetoRepository;
-    private final MapaMapperRequest objetoMapperRequest;
-    private final MapaMapperResponse objetoMapperResponse;
+    private final MapaMapperRequest mapaMapperRequest;
+    private final MapaMapperResponse mapaMapperResponse;
 
     @Transactional
     public void addObjeto(Long mapaId, Long objetoId) {
@@ -35,17 +35,17 @@ public class MapaService {
     }
 
     public List<MapaResponse> findAll(){
-        return mapaRepository.findAll().stream().map(objetoMapperResponse::toDto).collect(Collectors.toList());
+        return mapaRepository.findAll().stream().map(mapaMapperResponse::toDto).collect(Collectors.toList());
     }
 
     public MapaRequest create(MapaRequest request){
-        Mapa obj1 = objetoMapperRequest.toEntity(request);
+        Mapa obj1 = mapaMapperRequest.toEntity(request);
         Mapa objNuevo = mapaRepository.save(obj1);
-        return objetoMapperRequest.toDto(objNuevo);
+        return mapaMapperRequest.toDto(objNuevo);
     }
 
     public MapaResponse findById(Long id){
-        return mapaRepository.findById(id).map(objetoMapperResponse::toDto).orElseThrow(()->new RuntimeException("Id no encontrado"));
+        return mapaRepository.findById(id).map(mapaMapperResponse::toDto).orElseThrow(()->new RuntimeException("Id no encontrado"));
     }
 
     public void delete(Long id){
@@ -54,8 +54,8 @@ public class MapaService {
 
     public MapaResponse update(Long id, MapaRequest request){
         Mapa obj1 = mapaRepository.findById(id).orElseThrow(()->new RuntimeException("Id no encontrado"));
-        objetoMapperRequest.partialUpdate(request,obj1);
+        mapaMapperRequest.partialUpdate(request,obj1);
         Mapa nuevo = mapaRepository.save(obj1);
-        return objetoMapperResponse.toDto(nuevo);
+        return mapaMapperResponse.toDto(nuevo);
     }
 }

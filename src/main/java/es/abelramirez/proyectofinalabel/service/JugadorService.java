@@ -15,32 +15,32 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class JugadorService {
-    private final JugadorRepository objetoRepository;
-    private final JugadorMapperRequest objetoMapperRequest;
-    private final JugadorMapperResponse objetoMapperResponse;
+    private final JugadorRepository jugadorRepository;
+    private final JugadorMapperRequest jugadorMapperRequest;
+    private final JugadorMapperResponse jugadorMapperResponse;
 
     public List<JugadorResponse> findAll(){
-        return objetoRepository.findAll().stream().map(objetoMapperResponse::toDto).collect(Collectors.toList());
+        return jugadorRepository.findAll().stream().map(jugadorMapperResponse::toDto).collect(Collectors.toList());
     }
 
     public JugadorRequest create(JugadorRequest request){
-        Jugador obj1 = objetoMapperRequest.toEntity(request);
-        Jugador objNuevo = objetoRepository.save(obj1);
-        return objetoMapperRequest.toDto(objNuevo);
+        Jugador obj1 = jugadorMapperRequest.toEntity(request);
+        Jugador objNuevo = jugadorRepository.save(obj1);
+        return jugadorMapperRequest.toDto(objNuevo);
     }
 
     public JugadorResponse findById(Long id){
-        return objetoRepository.findById(id).map(objetoMapperResponse::toDto).orElseThrow(()->new RuntimeException("Id no encontrado"));
+        return jugadorRepository.findById(id).map(jugadorMapperResponse::toDto).orElseThrow(()->new RuntimeException("Id no encontrado"));
     }
 
     public void delete(Long id){
-        objetoRepository.deleteById(id);
+        jugadorRepository.deleteById(id);
     }
 
     public JugadorResponse update(Long id, JugadorRequest request){
-        Jugador obj1 = objetoRepository.findById(id).orElseThrow(()->new RuntimeException("Id no encontrado"));
-        objetoMapperRequest.partialUpdate(request,obj1);
-        Jugador nuevo = objetoRepository.save(obj1);
-        return objetoMapperResponse.toDto(nuevo);
+        Jugador obj1 = jugadorRepository.findById(id).orElseThrow(()->new RuntimeException("Id no encontrado"));
+        jugadorMapperRequest.partialUpdate(request,obj1);
+        Jugador nuevo = jugadorRepository.save(obj1);
+        return jugadorMapperResponse.toDto(nuevo);
     }
 }

@@ -18,36 +18,36 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @Tag(name="Controlador de los personajes",description = "Gestiona los personajes jugables")
 public class PersonajeController {
-    private final PersonajeService enemigoService;
+    private final PersonajeService personajeService;
 
     @GetMapping
     @Operation(summary = "Obtiene todos los personajes",description = "GET")
     public ResponseEntity<List<PersonajeResponse>> getAll() {
-        return ResponseEntity.ok(enemigoService.findAll());
+        return ResponseEntity.ok(personajeService.findAll());
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Obtiene un personaje espefico en base a su ID",description = "GET")
     public ResponseEntity<PersonajeResponse> getById(@Valid @PathVariable Long id) {
-        return ResponseEntity.ok(enemigoService.findById(id));
+        return ResponseEntity.ok(personajeService.findById(id));
     }
 
     @PostMapping
     @Operation(summary = "Crea un nuevo personaje",description = "POST")
     public ResponseEntity<PersonajeRequest> post(@RequestBody PersonajeRequest categoriaRequest) {
-        return ResponseEntity.ok(enemigoService.create(categoriaRequest));
+        return ResponseEntity.ok(personajeService.create(categoriaRequest));
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Edita un personaje ya existente, lo busca en base a su ID",description = "PUT")
     public ResponseEntity<PersonajeResponse> put(@Valid @PathVariable Long id,@RequestBody PersonajeRequest categoriaRequest) {
-        return ResponseEntity.ok(enemigoService.update(id,categoriaRequest));
+        return ResponseEntity.ok(personajeService.update(id,categoriaRequest));
     }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Borra un personaje ya existente, lo busca en base a su ID",description = "DELETE")
     public ResponseEntity<Void> delete(@Valid @PathVariable Long id) {
-        enemigoService.delete(id);
+        personajeService.delete(id);
         return ResponseEntity.noContent().build();
     }
 }

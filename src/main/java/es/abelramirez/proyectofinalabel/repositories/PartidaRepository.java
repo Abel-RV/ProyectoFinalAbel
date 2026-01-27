@@ -3,5 +3,8 @@ package es.abelramirez.proyectofinalabel.repositories;
 import es.abelramirez.proyectofinalabel.models.entities.Partida;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface PartidaRepository extends JpaRepository<Partida, Long> {
+    Optional<Partida> findByNombrePartida(String importado);
 }

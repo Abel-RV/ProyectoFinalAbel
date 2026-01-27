@@ -15,33 +15,33 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class PersonajeService {
-    private final PersonajeRepository objetoRepository;
-    private final PersonajeMapperRequest objetoMapperRequest;
-    private final PersonajeMapperResponse objetoMapperResponse;
+    private final PersonajeRepository personajeRepository;
+    private final PersonajeMapperRequest personajeMapperRequest;
+    private final PersonajeMapperResponse personajeMapperResponse;
 
     public List<PersonajeResponse> findAll(){
-        return objetoRepository.findAll().stream().map(objetoMapperResponse::toDto).collect(Collectors.toList());
+        return personajeRepository.findAll().stream().map(personajeMapperResponse::toDto).collect(Collectors.toList());
     }
 
     public PersonajeRequest create(PersonajeRequest request){
-        Personaje obj1 = objetoMapperRequest.toEntity(request);
-        Personaje objNuevo = objetoRepository.save(obj1);
-        return objetoMapperRequest.toDto(objNuevo);
+        Personaje obj1 = personajeMapperRequest.toEntity(request);
+        Personaje objNuevo = personajeRepository.save(obj1);
+        return personajeMapperRequest.toDto(objNuevo);
     }
 
     public PersonajeResponse findById(Long id){
-        return objetoRepository.findById(id).map(objetoMapperResponse::toDto).orElseThrow();
+        return personajeRepository.findById(id).map(personajeMapperResponse::toDto).orElseThrow();
     }
 
     public void delete(Long id){
-        objetoRepository.deleteById(id);
+        personajeRepository.deleteById(id);
     }
 
     public PersonajeResponse update(Long id, PersonajeRequest request){
-        Personaje obj1 = objetoRepository.findById(id).orElseThrow(()->new RuntimeException("Id no encontrado"));
-        objetoMapperRequest.partialUpdate(request,obj1);
-        Personaje nuevo = objetoRepository.save(obj1);
-        return objetoMapperResponse.toDto(nuevo);
+        Personaje obj1 = personajeRepository.findById(id).orElseThrow(()->new RuntimeException("Id no encontrado"));
+        personajeMapperRequest.partialUpdate(request,obj1);
+        Personaje nuevo = personajeRepository.save(obj1);
+        return personajeMapperResponse.toDto(nuevo);
     }
 
 }
